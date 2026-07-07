@@ -1,5 +1,5 @@
 // app/layout.tsx - Add modal to layout
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { PrismicPreview } from "@prismicio/next";
 import { repositoryName } from "@/prismicio";
 import { Rethink_Sans, Radley } from "next/font/google";
@@ -35,6 +35,12 @@ export async function generateMetadata(): Promise<Metadata> {
     description:
       settings.data.meta_description ||
       "Discover the exquisite collection of luxury fragrances by MARAÉ.",
+    manifest: "/manifest.json",
+    appleWebApp: {
+      capable: true,
+      statusBarStyle: "black-translucent",
+      title: "Karmique",
+    },
     openGraph: {
       images: isFilled.image(settings.data.fallback_og_image)
         ? [settings.data.fallback_og_image.url]
@@ -42,6 +48,11 @@ export async function generateMetadata(): Promise<Metadata> {
     },
   };
 }
+
+export const viewport: Viewport = {
+  themeColor: "#000000",
+};
+
 
 export default async function RootLayout({
   children,
